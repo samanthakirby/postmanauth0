@@ -1,0 +1,91 @@
+{
+	"info": {
+		"_postman_id": "a42f63ec-4cda-49cb-8fb8-a140788e4f76",
+		"name": "API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8498216",
+		"_collection_link": "https://orange-robot-667839.postman.co/workspace/7f47e622-9b30-4121-8216-b4ff76b8c60e/collection/8498216-a42f63ec-4cda-49cb-8fb8-a140788e4f76?action=share&source=collection_link&creator=8498216"
+	},
+	"item": [
+		{
+			"name": "Auth0",
+			"item": [
+				{
+					"name": "Get Token, Save Variable",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Variables\r",
+									"const response = pm.response.json();\r",
+									"pm.environment.set(\"JWT_TOKEN\", response.access_token);\r",
+									"\r",
+									"//Tests\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"client_id\": \"{{CLIENT_ID}}\",\r\n    \"client_secret\":\"{{CLIENT_SECRET}}\",\r\n    \"audience\": \"{{AUDIENCE}}\",\r\n    \"grant_type\": \"{{GRANT_TYPE}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{AUTH0_TOKEN_URL}}",
+							"host": [
+								"{{AUTH0_TOKEN_URL}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tests",
+			"item": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{JWT_TOKEN}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
